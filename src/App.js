@@ -2,6 +2,7 @@ import "./styles/app.scss";
 import Player from "./components/Player";
 import Song from "./components/Song";
 import data from "./utils/data";
+import Library from "./components/Library";
 import { useState, useRef } from "react";
 
 function App() {
@@ -28,6 +29,13 @@ function App() {
         setIsPlaying={setIsPlaying}
         songInfo={songInfo}
         setSongInfo={setSongInfo}
+      />
+      <Library
+        audioRef={audioRef}
+        isPlaying={isPlaying}
+        songs={songs}
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
       />
       <audio
         onTimeUpdate={timeUpdateHandler}
