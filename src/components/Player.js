@@ -40,7 +40,11 @@ const Player = ({
       </div>
       <div className="play-control">
         <FaStepBackward className="skip-back" size={28} />
-        <FaPlay onClick={playSongHandler} className="play" size={28} />
+        {isPlaying ? (
+          <FaPause onClick={playSongHandler} className="play" size={28} />
+        ) : (
+          <FaPlay onClick={playSongHandler} className="pause" size={28} />
+        )}
         <FaStepForward className="skip-forward" size={28} />
       </div>
     </div>
