@@ -1,4 +1,4 @@
-import { FaStepBackward, FaPlay, FaStepForward } from "react-icons/fa";
+import { FaStepBackward, FaPlay, FaStepForward, FaPause } from "react-icons/fa";
 import { getTime } from "../utils/getTime";
 
 const Player = ({
@@ -19,11 +19,23 @@ const Player = ({
       setIsPlaying(!isPlaying);
     }
   };
+
+  const dragHandler = (e) => {
+    audioRef.current.currentTime = e.target.value;
+    setSongInfo({ ...songInfo, currentTime: e.target.value });
+  };
+
   return (
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input type="range" />
+        <input
+          min={0}
+          max={songInfo.duration || 0}
+          value={songInfo.currentTime}
+          onChange={dragHandler}
+          type="range"
+        />
         <p>{getTime(songInfo.duration || 0)}</p>
       </div>
       <div className="play-control">
