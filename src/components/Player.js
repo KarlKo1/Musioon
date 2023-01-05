@@ -12,6 +12,7 @@ const Player = ({
   songs,
   setCurrentSong,
 }) => {
+  const animationPercentage = (songInfo.currentTime / songInfo.duration) * 100;
   //Event handlers
   const playSongHandler = () => {
     if (isPlaying) {
@@ -47,30 +48,43 @@ const Player = ({
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input
-          min={0}
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          onChange={dragHandler}
-          type="range"
-        />
+        <div
+          className="track"
+          style={{
+            background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
+          }}
+        >
+          <input
+            min={0}
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            onChange={dragHandler}
+            type="range"
+          />
+          <div
+            className="animate-track"
+            style={{
+              transform: `translateX(${animationPercentage}%)`,
+            }}
+          ></div>
+        </div>
         <p>{getTime(songInfo.duration || 0)}</p>
       </div>
       <div className="play-control">
         <FaStepBackward
           onClick={() => skipTrackHandler("skip-back")}
           className="skip-back"
-          size={28}
+          size={36}
         />
         {isPlaying ? (
-          <FaPause onClick={playSongHandler} className="play" size={28} />
+          <FaPause onClick={playSongHandler} className="play" size={36} />
         ) : (
-          <FaPlay onClick={playSongHandler} className="pause" size={28} />
+          <FaPlay onClick={playSongHandler} className="pause" size={36} />
         )}
         <FaStepForward
           onClick={() => skipTrackHandler("skip-forward")}
           className="skip-forward"
-          size={28}
+          size={36}
         />
       </div>
     </div>
