@@ -1,6 +1,5 @@
 import { FaStepBackward, FaPlay, FaStepForward, FaPause } from "react-icons/fa";
 import { getTime } from "../utils/getTime";
-import { playAudio } from "../utils/playAudio";
 
 const Player = ({
   currentSong,
@@ -29,19 +28,19 @@ const Player = ({
     setSongInfo({ ...songInfo, currentTime: e.target.value });
   };
 
-  const skipTrackHandler = (direction) => {
+  const skipTrackHandler = async (direction) => {
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     if (direction === "skip-forward") {
-      setCurrentSong(
+      await setCurrentSong(
         songs[currentIndex + 1 === songs.length ? 0 : currentIndex + 1]
       );
     }
     if (direction === "skip-back") {
-      setCurrentSong(
+      await setCurrentSong(
         songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1]
       );
     }
-    playAudio(isPlaying, audioRef);
+    if (isPlaying) audioRef.current.play();
   };
 
   return (
