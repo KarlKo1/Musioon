@@ -10,6 +10,7 @@ const Player = ({
   setSongInfo,
   songs,
   setCurrentSong,
+  skipTrackHandler,
 }) => {
   const animationPercentage = (songInfo.currentTime / songInfo.duration) * 100;
   //Event handlers
@@ -26,21 +27,6 @@ const Player = ({
   const dragHandler = (e) => {
     audioRef.current.currentTime = e.target.value;
     setSongInfo({ ...songInfo, currentTime: e.target.value });
-  };
-
-  const skipTrackHandler = async (direction) => {
-    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
-    if (direction === "skip-forward") {
-      await setCurrentSong(
-        songs[currentIndex + 1 === songs.length ? 0 : currentIndex + 1]
-      );
-    }
-    if (direction === "skip-back") {
-      await setCurrentSong(
-        songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1]
-      );
-    }
-    if (isPlaying) audioRef.current.play();
   };
 
   return (
