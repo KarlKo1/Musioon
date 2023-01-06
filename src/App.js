@@ -4,11 +4,12 @@ import Song from "./components/Song";
 import data from "./utils/data";
 import Library from "./components/Library";
 import Nav from "./components/Nav";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function App() {
   //States
   const audioRef = useRef(null);
+  const btnRef = useRef();
   const [songs, setSongs] = useState(data());
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -44,9 +45,22 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const closeLibrary = (e) => {
+      if (e.path[0] !== btnRef.current) {
+        setLibraryStatus(false);
+      }
+    };
+    document.body.addEventListener("click", closeLibrary);
+  });
+
   return (
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
-      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
+      <Nav
+        libraryStatus={libraryStatus}
+        setLibraryStatus={setLibraryStatus}
+        btnRef={btnRef}
+      />
       <Song currentSong={currentSong} />
       <Player
         audioRef={audioRef}
@@ -67,6 +81,7 @@ function App() {
         setCurrentSong={setCurrentSong}
         libraryStatus={libraryStatus}
         setLibraryStatus={setLibraryStatus}
+        btnRef={btnRef}
       />
       <audio
         onTimeUpdate={timeUpdateHandler}

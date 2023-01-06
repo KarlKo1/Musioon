@@ -1,5 +1,4 @@
 import LibrarySong from "./LibrarySong";
-import { useState } from "react";
 
 const Library = ({
   songs,
@@ -10,11 +9,15 @@ const Library = ({
   libraryStatus,
   setLibraryStatus,
 }) => {
-  const toggleHover = () => setLibraryStatus(!libraryStatus);
+  const toggleHover = () => {
+    if (!libraryStatus) {
+      setLibraryStatus(!libraryStatus);
+    }
+  };
+
   return (
     <div
       onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
       className={`library ${libraryStatus ? "active-library" : ""}`}
     >
       <h2>Library</h2>
