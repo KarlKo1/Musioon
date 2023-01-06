@@ -1,4 +1,5 @@
 import LibrarySong from "./LibrarySong";
+import { useState } from "react";
 
 const Library = ({
   songs,
@@ -7,9 +8,15 @@ const Library = ({
   audioRef,
   isPlaying,
   libraryStatus,
+  setLibraryStatus,
 }) => {
+  const toggleHover = () => setLibraryStatus(!libraryStatus);
   return (
-    <div className={`library ${libraryStatus ? "active-library" : ""}`}>
+    <div
+      onMouseEnter={toggleHover}
+      onMouseLeave={toggleHover}
+      className={`library ${libraryStatus ? "active-library" : ""}`}
+    >
       <h2>Library</h2>
       <div className="library-songs">
         {songs.map((song) => (

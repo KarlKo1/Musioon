@@ -66,6 +66,7 @@ function App() {
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
         libraryStatus={libraryStatus}
+        setLibraryStatus={setLibraryStatus}
       />
       <audio
         onTimeUpdate={timeUpdateHandler}
