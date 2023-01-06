@@ -1,5 +1,12 @@
-import { FaStepBackward, FaPlay, FaStepForward, FaPause } from "react-icons/fa";
+import {
+  FaStepBackward,
+  FaPlay,
+  FaStepForward,
+  FaPause,
+  FaVolumeDown,
+} from "react-icons/fa";
 import { getTime } from "../utils/getTime";
+import { useState } from "react";
 
 const Player = ({
   currentSong,
@@ -12,6 +19,7 @@ const Player = ({
   setCurrentSong,
   skipTrackHandler,
 }) => {
+  const [activeVolume, setActiveVolume] = useState(false);
   const animationPercentage = (songInfo.currentTime / songInfo.duration) * 100;
   //Event handlers
   const playSongHandler = () => {
@@ -27,6 +35,12 @@ const Player = ({
   const dragHandler = (e) => {
     audioRef.current.currentTime = e.target.value;
     setSongInfo({ ...songInfo, currentTime: e.target.value });
+  };
+
+  const changeVolumeHandler = (e) => {
+    let value = e.target.value;
+    audioRef.current.volume = value;
+    setSongInfo({ ...songInfo, volume: value });
   };
 
   return (
@@ -54,6 +68,28 @@ const Player = ({
           ></div>
         </div>
         <p>{getTime(songInfo.duration || 0)}</p>
+      </div>
+      <div
+        className="volume-control"
+        onMouseEnter={() => setActiveVolume(!activeVolume)}
+        onMouseLeave={() => setActiveVolume(!activeVolume)}
+      >
+        <FaVolumeDown
+          size={18}
+          className="volume-down"
+          style={activeVolume ? { opacity: 1 } : { opacity: 0.3 }}
+        />
+        {activeVolume && (
+          <input
+            className="volumeControl"
+            onChange={changeVolumeHandler}
+            value={songInfo.volume}
+            max="1"
+            min="0"
+            step="0.01"
+            type="range"
+          />
+        )}
       </div>
       <div className="play-control">
         <FaStepBackward
