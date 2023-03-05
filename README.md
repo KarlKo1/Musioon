@@ -1,3 +1,10 @@
+# Musioon
+Music player application using react.
+Users can:
+* play/pause song
+* skip song
+* choose song from library
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
