@@ -4,10 +4,13 @@ const LibrarySong = ({
   setCurrentSong,
   audioRef,
   isPlaying,
+  libraryStatus,
+  setLibraryStatus,
 }) => {
   const songSelectHandler = async () => {
     await setCurrentSong(song);
     if (isPlaying) audioRef.current.play();
+    setLibraryStatus(!libraryStatus);
   };
 
   return (
