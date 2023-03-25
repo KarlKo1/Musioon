@@ -47,7 +47,8 @@ function App() {
 
   useEffect(() => {
     const closeLibrary = (e) => {
-      if (e.path[0] !== btnRef.current) {
+      console.log(e);
+      if (e.target !== btnRef.current) {
         setLibraryStatus(false);
       }
     };
