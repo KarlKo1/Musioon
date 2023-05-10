@@ -46,15 +46,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const closeLibrary = (e) => {
-      if (e.path[0] !== btnRef.current) {
-        setLibraryStatus(false);
-      }
-    };
-    document.body.addEventListener("click", closeLibrary);
-  });
-
   return (
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
       <Nav
