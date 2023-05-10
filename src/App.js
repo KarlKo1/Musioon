@@ -16,6 +16,7 @@ function App() {
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
+    volume: 0.5,
   });
   const [libraryStatus, setLibraryStatus] = useState(false);
 
@@ -44,15 +45,6 @@ function App() {
       }, 100);
     }
   };
-
-  useEffect(() => {
-    const closeLibrary = (e) => {
-      if (e.path[0] !== btnRef.current) {
-        setLibraryStatus(false);
-      }
-    };
-    document.body.addEventListener("click", closeLibrary);
-  });
 
   return (
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
