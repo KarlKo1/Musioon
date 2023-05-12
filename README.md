@@ -15,6 +15,7 @@ A music player application.
 
 - React
 - SASS
+- Music from Chillhop
 
 ## Contributing
 
