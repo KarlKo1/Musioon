@@ -1,26 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
-function importAll(r) {
-  let audio = {};
-  r.keys().map((item, index) => {
-    audio[item.replace("./", "")] = r(item);
-  });
-  return audio;
-}
-const audio = importAll(require.context("../sounds", false, /\.(mp3)$/));
-
 function chillHop() {
   return [
-    {
-      name: "Beaver Creek",
-      cover:
-        "https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg",
-      artist: "Aso, Middle School, Aviino",
-      audio: audio["audio3.mp3"],
-      color: ["#205950", "#2ab3bf"],
-      id: uuidv4(),
-      active: true,
-    },
     {
       name: "Daylight",
       cover:
